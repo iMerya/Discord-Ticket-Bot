@@ -26,4 +26,4 @@ Made with :heart: and JavaScript!
 
 Please Contact Me For Issues.
 
-####Discord : Merya#0001
+Discord : Merya#0001
