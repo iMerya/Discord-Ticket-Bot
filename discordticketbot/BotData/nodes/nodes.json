@@ -1,0 +1,1584 @@
+{
+  "nodes": [
+    {
+      "type": "response",
+      "name": "check Teanler",
+      "guid": "d061cacb-c8cb-45b1-8f00-aa564607d6a5",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "has perms",
+          "connections": [
+            "0a8d6143-c6eb-47c8-9bc6-ab4ce5bb090a",
+            "1c9d5354-b471-465b-95fd-e0848901c126"
+          ]
+        },
+        {
+          "label": "doesn't have perms",
+          "connections": [
+            "d12e5905-6ce3-4572-80d7-feb5ce8decd4"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "a68d9cdf-6e73-4555-bee9-5b5f4fdf86e8"
+        }
+      ],
+      "x": 175,
+      "y": 168,
+      "rtype": "User Action",
+      "rsubtype": "Check User Permissions",
+      "formdata": [
+        "${dbsVars.CommandAuthor.id}",
+        [
+          "ADMINISTRATOR"
+        ]
+      ],
+      "formnames": [
+        "user",
+        "permissions"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "command",
+      "name": "ticket",
+      "guid": "a68d9cdf-6e73-4555-bee9-5b5f4fdf86e8",
+      "outputs": [
+        {
+          "label": "responses",
+          "connections": [
+            "d061cacb-c8cb-45b1-8f00-aa564607d6a5"
+          ]
+        }
+      ],
+      "inputs": [],
+      "x": 11,
+      "y": 179
+    },
+    {
+      "type": "response",
+      "name": "send error",
+      "guid": "d12e5905-6ce3-4572-80d7-feb5ce8decd4",
+      "reactionFields": [],
+      "embedfields": [],
+      "saveToVariable": "error",
+      "saveToVariableType": "temp",
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "3e9bdb29-2a7f-456b-a789-8542609010ae"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "d061cacb-c8cb-45b1-8f00-aa564607d6a5"
+        }
+      ],
+      "x": 332,
+      "y": 325,
+      "rtype": "Message",
+      "rsubtype": "Send Embed",
+      "formdata": [
+        "${dbsVars.CommandAuthor.id}",
+        "FF0000",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "You do not have sufficient privileges to do this!\n",
+        "",
+        "",
+        "",
+        "false",
+        "error",
+        "temp"
+      ],
+      "formnames": [
+        "channelname",
+        "color",
+        "title",
+        "url",
+        "authorname",
+        "authorimageurl",
+        "authorlink",
+        "description",
+        "thumbnail",
+        "image",
+        "footer",
+        "timestamp",
+        "saveToVariable",
+        "saveToVariableType"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "wait del error",
+      "guid": "3e9bdb29-2a7f-456b-a789-8542609010ae",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "3c2f334b-2cc1-4a01-a49d-f96abcad5a76"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "d12e5905-6ce3-4572-80d7-feb5ce8decd4"
+        }
+      ],
+      "x": 519,
+      "y": 329,
+      "rtype": "Control",
+      "rsubtype": "Wait",
+      "formdata": [
+        "5",
+        "seconds"
+      ],
+      "formnames": [
+        "waitduration",
+        "unit"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "del error",
+      "guid": "3c2f334b-2cc1-4a01-a49d-f96abcad5a76",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": []
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "3e9bdb29-2a7f-456b-a789-8542609010ae"
+        }
+      ],
+      "x": 719,
+      "y": 328,
+      "rtype": "Message",
+      "rsubtype": "Delete Message",
+      "formdata": [
+        "${tempVars.error.id}",
+        "${dbsVars.CommandChannel.id}"
+      ],
+      "formnames": [
+        "varname",
+        "channelName"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "send panel",
+      "guid": "0a8d6143-c6eb-47c8-9bc6-ab4ce5bb090a",
+      "reactionFields": [],
+      "embedfields": [],
+      "saveToVariable": "TicketPanel",
+      "saveToVariableType": "temp",
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "63a8bee9-b9ee-4ba6-a445-93a9cc53bb2d"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "d061cacb-c8cb-45b1-8f00-aa564607d6a5"
+        }
+      ],
+      "x": 341,
+      "y": 195,
+      "rtype": "Message",
+      "rsubtype": "Send Embed",
+      "formdata": [
+        "${dbsVars.CommandChannel.id}",
+        "00FF44",
+        "Ticket Support",
+        "",
+        "",
+        "",
+        "",
+        "React with '📨' to create a support ticket\n",
+        "${dbsVars.guild.iconURL}",
+        "",
+        "Support System Beta v1 Developer By Merya",
+        "false",
+        "TicketPanel",
+        "temp"
+      ],
+      "formnames": [
+        "channelname",
+        "color",
+        "title",
+        "url",
+        "authorname",
+        "authorimageurl",
+        "authorlink",
+        "description",
+        "thumbnail",
+        "image",
+        "footer",
+        "timestamp",
+        "saveToVariable",
+        "saveToVariableType"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "add panel reactions",
+      "guid": "63a8bee9-b9ee-4ba6-a445-93a9cc53bb2d",
+      "reactionFields": [
+        "📨"
+      ],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "📨",
+          "connections": [
+            "361d762e-662d-4484-ae50-4c929c6d607f",
+            "feef741c-748a-45be-be7e-7641f388b257"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "0a8d6143-c6eb-47c8-9bc6-ab4ce5bb090a"
+        }
+      ],
+      "x": 501,
+      "y": 185,
+      "rtype": "Reaction",
+      "rsubtype": "Add Reaction Listener",
+      "formdata": [
+        "${tempVars.TicketPanel.id}",
+        "0",
+        "SupportEmoji",
+        "SupportUser",
+        "BOOL_TRUE@@"
+      ],
+      "formnames": [
+        "message",
+        "duration",
+        "reactionemoji",
+        "reactionuser",
+        "react"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "create Ticket",
+      "guid": "361d762e-662d-4484-ae50-4c929c6d607f",
+      "reactionFields": [],
+      "embedfields": [],
+      "saveToVariable": "NewTicket",
+      "saveToVariableType": "temp",
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "8a422412-01eb-43e8-a82f-8e5aac35dd90"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "63a8bee9-b9ee-4ba6-a445-93a9cc53bb2d"
+        }
+      ],
+      "x": 665,
+      "y": 156,
+      "rtype": "Channel Action",
+      "rsubtype": "Create Channel",
+      "formdata": [
+        "ticket-${tempVars.SupportUser.displayName}",
+        "1077624700898922506",
+        "Neues Ticket",
+        "Text",
+        "NewTicket",
+        "temp"
+      ],
+      "formnames": [
+        "channelname",
+        "chancategory",
+        "reason",
+        "channeltype",
+        "saveToVariable",
+        "saveToVariableType"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "update perms",
+      "guid": "8a422412-01eb-43e8-a82f-8e5aac35dd90",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "9c7fe197-ed0a-4518-9f16-4fb685518001"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "361d762e-662d-4484-ae50-4c929c6d607f"
+        }
+      ],
+      "x": 829,
+      "y": 148,
+      "rtype": "Channel Action",
+      "rsubtype": "Update Channel Permissions",
+      "formdata": [
+        "${tempVars.NewTicket.id}",
+        "${tempVars.SupportUser.id}",
+        [
+          "VIEW_CHANNEL",
+          "SEND_MESSAGES",
+          "READ_MESSAGE_HISTORY"
+        ],
+        "Allow"
+      ],
+      "formnames": [
+        "channelName",
+        "permid",
+        "permissions",
+        "allow"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "update perms_1",
+      "guid": "9c7fe197-ed0a-4518-9f16-4fb685518001",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "d4f65800-a9ba-4990-85fd-0f3d8809c090"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "8a422412-01eb-43e8-a82f-8e5aac35dd90"
+        }
+      ],
+      "x": 979,
+      "y": 147,
+      "rtype": "Channel Action",
+      "rsubtype": "Update Channel Permissions",
+      "formdata": [
+        "${tempVars.NewTicket.id}",
+        "286590281032269825",
+        [
+          "VIEW_CHANNEL",
+          "SEND_MESSAGES",
+          "MANAGE_MESSAGES",
+          "READ_MESSAGE_HISTORY"
+        ],
+        "Allow"
+      ],
+      "formnames": [
+        "channelName",
+        "permid",
+        "permissions",
+        "allow"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "send User/Team Ping",
+      "guid": "6d836a4b-427c-4e83-96e8-dc3e128b1ce8",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "b65fb0ef-eced-4bd3-b4ff-5b121c7ecc72"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "d4f65800-a9ba-4990-85fd-0f3d8809c090"
+        }
+      ],
+      "x": 1285,
+      "y": 146,
+      "rtype": "Message",
+      "rsubtype": "Send Message",
+      "formdata": [
+        "${tempVars.NewTicket.id}",
+        "<@${tempVars.SupportUser.id}> | <@&979222431677952050>",
+        "",
+        "temp"
+      ],
+      "formnames": [
+        "channelName",
+        "messageText",
+        "saveToVariable",
+        "saveToVariableType"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "wait del error_1",
+      "guid": "d4f65800-a9ba-4990-85fd-0f3d8809c090",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "6d836a4b-427c-4e83-96e8-dc3e128b1ce8"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "9c7fe197-ed0a-4518-9f16-4fb685518001"
+        }
+      ],
+      "x": 1129,
+      "y": 145,
+      "rtype": "Control",
+      "rsubtype": "Wait",
+      "formdata": [
+        "1",
+        "seconds"
+      ],
+      "formnames": [
+        "waitduration",
+        "unit"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "wait del error_2",
+      "guid": "b65fb0ef-eced-4bd3-b4ff-5b121c7ecc72",
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "078f64dd-6bce-4d88-820a-1ff08d8c45bf"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "6d836a4b-427c-4e83-96e8-dc3e128b1ce8"
+        }
+      ],
+      "x": 1450,
+      "y": 149,
+      "rtype": "Control",
+      "rsubtype": "Wait",
+      "formdata": [
+        "5",
+        "seconds"
+      ],
+      "formnames": [
+        "waitduration",
+        "unit"
+      ],
+      "messageActionRows": []
+    },
+    {
+      "type": "response",
+      "name": "send Ticket Msg",
+      "guid": "078f64dd-6bce-4d88-820a-1ff08d8c45bf",
+      "reactionFields": [],
+      "embedfields": [],
+      "saveToVariable": "TicketMsg",
+      "saveToVariableType": "temp",
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "531ad112-295b-459a-8e91-340415b95873",
+            "412b271a-c789-4be5-8b69-467ee70ea32e"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "b65fb0ef-eced-4bd3-b4ff-5b121c7ecc72"
+        }
+      ],
+      "x": 1617,
+      "y": 155,
+      "rtype": "Message",
+      "rsubtype": "Send Embed",
+      "formdata": [
+        "${tempVars.NewTicket.id}",
+        "14FBFF",
+        "Welcome",
+        "",
+        "${tempVars.SupportUser.displayName}",
+        "${dbsVars.guild.iconURL}",
+        "",
+        "<@${tempVars.SupportUser.id}> Welcome to your ticket. A team member will take care of you soon. Please write your request in time.",
+        "${tempVars.SupportUser.user.avatarURL}",
+        "",
+        "ID. ${tempVars.SupportUser.id}",
+        "false",
+        "TicketMsg",
+        "temp"
+      ],
+      "formnames": [
+        "channelname",
+        "color",
+        "title",
+        "url",
+        "authorname",
+        "authorimageurl",
+        "authorlink",
+        "description",
+        "thumbnail",
+        "image",
+        "footer",
+        "timestamp",
+        "saveToVariable",
+        "saveToVariableType"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "add Close Emoji",
+      "guid": "531ad112-295b-459a-8e91-340415b95873",
+      "reactionFields": [
+        "🔒"
+      ],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "🔒",
+          "connections": [
+            "9b9bdd5a-abae-42c1-b630-f3a9d3e5e6b9"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "078f64dd-6bce-4d88-820a-1ff08d8c45bf"
+        }
+      ],
+      "x": 1776,
+      "y": 159,
+      "rtype": "Reaction",
+      "rsubtype": "Add Reaction Listener",
+      "formdata": [
+        "${tempVars.TicketMsg.id}",
+        "0",
+        "CloseEmoji",
+        "CloseUser",
+        "BOOL_TRUE@@"
+      ],
+      "formnames": [
+        "message",
+        "duration",
+        "reactionemoji",
+        "reactionuser",
+        "react"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "check Teamler",
+      "guid": "9b9bdd5a-abae-42c1-b630-f3a9d3e5e6b9",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "has perms",
+          "connections": [
+            "0de36157-77ff-47b8-a796-2cdb122f90ba"
+          ]
+        },
+        {
+          "label": "doesn't have perms",
+          "connections": [
+            "eab63d8e-a507-4941-8fdb-c25e7ce6a6f9"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "531ad112-295b-459a-8e91-340415b95873"
+        }
+      ],
+      "x": 1944,
+      "y": 166,
+      "rtype": "User Action",
+      "rsubtype": "Check User Permissions",
+      "formdata": [
+        "${tempVars.CloseUser.id}",
+        [
+          "KICK_MEMBERS",
+          "BAN_MEMBERS"
+        ]
+      ],
+      "formnames": [
+        "user",
+        "permissions"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "Close Frag Nach",
+      "guid": "0de36157-77ff-47b8-a796-2cdb122f90ba",
+      "reactionFields": [],
+      "embedfields": [],
+      "saveToVariable": "CloseFragNach",
+      "saveToVariableType": "temp",
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "cd2dd675-8652-4118-adef-d1de6e1ee52a"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "9b9bdd5a-abae-42c1-b630-f3a9d3e5e6b9"
+        }
+      ],
+      "x": 2104,
+      "y": 97,
+      "rtype": "Message",
+      "rsubtype": "Send Embed",
+      "formdata": [
+        "${tempVars.NewTicket.id}",
+        "FF0000",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "<@${tempVars.CloseUser.id}> Do you really want to close the ticket?\n",
+        "",
+        "",
+        "",
+        "false",
+        "CloseFragNach",
+        "temp"
+      ],
+      "formnames": [
+        "channelname",
+        "color",
+        "title",
+        "url",
+        "authorname",
+        "authorimageurl",
+        "authorlink",
+        "description",
+        "thumbnail",
+        "image",
+        "footer",
+        "timestamp",
+        "saveToVariable",
+        "saveToVariableType"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "close Fail",
+      "guid": "eab63d8e-a507-4941-8fdb-c25e7ce6a6f9",
+      "reactionFields": [],
+      "embedfields": [],
+      "saveToVariable": "CloseFail",
+      "saveToVariableType": "temp",
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "6941af5f-7713-4347-b75f-d4924324e612"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "9b9bdd5a-abae-42c1-b630-f3a9d3e5e6b9"
+        }
+      ],
+      "x": 2095,
+      "y": 277,
+      "rtype": "Message",
+      "rsubtype": "Send Embed",
+      "formdata": [
+        "${tempVars.NewTicket.id}",
+        "FF0000",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "<@${tempVars.CloseUser.id}> you cannot close your own ticket !\n",
+        "",
+        "",
+        "",
+        "false",
+        "CloseFail",
+        "temp"
+      ],
+      "formnames": [
+        "channelname",
+        "color",
+        "title",
+        "url",
+        "authorname",
+        "authorimageurl",
+        "authorlink",
+        "description",
+        "thumbnail",
+        "image",
+        "footer",
+        "timestamp",
+        "saveToVariable",
+        "saveToVariableType"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "wait del error_3",
+      "guid": "6941af5f-7713-4347-b75f-d4924324e612",
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "5cceaf92-2948-4b75-8c2c-68a4220fde40"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "eab63d8e-a507-4941-8fdb-c25e7ce6a6f9"
+        }
+      ],
+      "x": 2255,
+      "y": 272,
+      "rtype": "Control",
+      "rsubtype": "Wait",
+      "formdata": [
+        "5",
+        "seconds"
+      ],
+      "formnames": [
+        "waitduration",
+        "unit"
+      ],
+      "messageActionRows": []
+    },
+    {
+      "type": "response",
+      "name": "del error_1",
+      "guid": "5cceaf92-2948-4b75-8c2c-68a4220fde40",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": []
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "6941af5f-7713-4347-b75f-d4924324e612"
+        }
+      ],
+      "x": 2424,
+      "y": 338,
+      "rtype": "Message",
+      "rsubtype": "Delete Message",
+      "formdata": [
+        "${tempVars.CloseFail.id}",
+        "${dbsVars.CommandChannel.id}"
+      ],
+      "formnames": [
+        "varname",
+        "channelName"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "add close Emojis",
+      "guid": "cd2dd675-8652-4118-adef-d1de6e1ee52a",
+      "reactionFields": [
+        "☑️",
+        "❌"
+      ],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "☑️",
+          "connections": [
+            "43255174-a3fb-446b-acf8-fd0513ee13d2"
+          ]
+        },
+        {
+          "label": "❌",
+          "connections": [
+            "89a229e8-0a4f-429b-9589-546d5c23aa68"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "0de36157-77ff-47b8-a796-2cdb122f90ba"
+        }
+      ],
+      "x": 2267,
+      "y": 103,
+      "rtype": "Reaction",
+      "rsubtype": "Add Reaction Listener",
+      "formdata": [
+        "${tempVars.CloseFragNach.id}",
+        "0",
+        "Close2Emoji",
+        "Close2User",
+        "BOOL_TRUE@@"
+      ],
+      "formnames": [
+        "message",
+        "duration",
+        "reactionemoji",
+        "reactionuser",
+        "react"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "Close Check Msg",
+      "guid": "43255174-a3fb-446b-acf8-fd0513ee13d2",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "fa212473-ec10-4398-bcd1-f56dc6366282"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "cd2dd675-8652-4118-adef-d1de6e1ee52a"
+        }
+      ],
+      "x": 2431,
+      "y": 64,
+      "rtype": "Message",
+      "rsubtype": "Send Embed",
+      "formdata": [
+        "${tempVars.NewTicket.id}",
+        "FF0000",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "Das Ticket <#${tempVars.NewTicket.id}> will be drawn in 5 seconds !",
+        "",
+        "",
+        "",
+        "false",
+        "",
+        "temp"
+      ],
+      "formnames": [
+        "channelname",
+        "color",
+        "title",
+        "url",
+        "authorname",
+        "authorimageurl",
+        "authorlink",
+        "description",
+        "thumbnail",
+        "image",
+        "footer",
+        "timestamp",
+        "saveToVariable",
+        "saveToVariableType"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "Del Ticket",
+      "guid": "94a02fd8-d83a-4f9e-82d2-081646dca87a",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "2881ad31-4088-4a0f-9eb7-96bf7c7a2ecd"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "fa212473-ec10-4398-bcd1-f56dc6366282"
+        }
+      ],
+      "x": 2778,
+      "y": 70,
+      "rtype": "Channel Action",
+      "rsubtype": "Delete Channel",
+      "formdata": [
+        "${tempVars.NewTicket.id}",
+        "Ticket Complete"
+      ],
+      "formnames": [
+        "channelname",
+        "reason"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "wait del error_3_1",
+      "guid": "fa212473-ec10-4398-bcd1-f56dc6366282",
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "94a02fd8-d83a-4f9e-82d2-081646dca87a"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "43255174-a3fb-446b-acf8-fd0513ee13d2"
+        }
+      ],
+      "x": 2606,
+      "y": 59,
+      "rtype": "Control",
+      "rsubtype": "Wait",
+      "formdata": [
+        "5",
+        "seconds"
+      ],
+      "formnames": [
+        "waitduration",
+        "unit"
+      ],
+      "messageActionRows": []
+    },
+    {
+      "type": "response",
+      "name": "del Ticket Block role",
+      "guid": "2881ad31-4088-4a0f-9eb7-96bf7c7a2ecd",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": []
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "94a02fd8-d83a-4f9e-82d2-081646dca87a"
+        }
+      ],
+      "x": 2949,
+      "y": 49,
+      "rtype": "User Action",
+      "rsubtype": "Remove Role From User",
+      "formdata": [
+        "${tempVars.SupportUser.id}",
+        "1052457839077097573",
+        "Neues Ticket"
+      ],
+      "formnames": [
+        "user",
+        "roleName",
+        "reason"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "add Ticket Block role",
+      "guid": "feef741c-748a-45be-be7e-7641f388b257",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": []
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "63a8bee9-b9ee-4ba6-a445-93a9cc53bb2d"
+        }
+      ],
+      "x": 658,
+      "y": 20,
+      "rtype": "User Action",
+      "rsubtype": "Add Role to User",
+      "formdata": [
+        "${tempVars.SupportUser.id}",
+        "1052457839077097573"
+      ],
+      "formnames": [
+        "user",
+        "roleName"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "del Frag Nach",
+      "guid": "89a229e8-0a4f-429b-9589-546d5c23aa68",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": []
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "cd2dd675-8652-4118-adef-d1de6e1ee52a"
+        }
+      ],
+      "x": 2441,
+      "y": 217,
+      "rtype": "Message",
+      "rsubtype": "Delete Message",
+      "formdata": [
+        "${tempVars.CloseFragNach.id}",
+        "${tempVars.NewTicket.id}"
+      ],
+      "formnames": [
+        "varname",
+        "channelName"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "del command",
+      "guid": "1c9d5354-b471-465b-95fd-e0848901c126",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": []
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "d061cacb-c8cb-45b1-8f00-aa564607d6a5"
+        }
+      ],
+      "x": 344,
+      "y": 74,
+      "rtype": "Message",
+      "rsubtype": "Delete Message",
+      "formdata": [
+        "${dbsVars.CommandMessage.id}",
+        "${dbsVars.CommandChannel.id}"
+      ],
+      "formnames": [
+        "varname",
+        "channelName"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "add Claim Reactions",
+      "guid": "412b271a-c789-4be5-8b69-467ee70ea32e",
+      "reactionFields": [
+        "📜"
+      ],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "📜",
+          "connections": [
+            "db003400-10b0-4466-9105-59b8e93740a5"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "078f64dd-6bce-4d88-820a-1ff08d8c45bf"
+        }
+      ],
+      "x": 1759,
+      "y": 306,
+      "rtype": "Reaction",
+      "rsubtype": "Add Reaction Listener",
+      "formdata": [
+        "${tempVars.TicketMsg.id}",
+        "0",
+        "ClaimEmoji",
+        "ClaimUser",
+        "BOOL_TRUE@@"
+      ],
+      "formnames": [
+        "message",
+        "duration",
+        "reactionemoji",
+        "reactionuser",
+        "react"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "check Teamler_1",
+      "guid": "db003400-10b0-4466-9105-59b8e93740a5",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "has perms",
+          "connections": [
+            "cfc02311-ac9d-475d-9c5e-5fb943cdb395"
+          ]
+        },
+        {
+          "label": "doesn't have perms",
+          "connections": [
+            "bdb9a658-23bb-468f-95ce-ab7f7895944a"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "412b271a-c789-4be5-8b69-467ee70ea32e"
+        }
+      ],
+      "x": 1937,
+      "y": 399,
+      "rtype": "User Action",
+      "rsubtype": "Check User Permissions",
+      "formdata": [
+        "${tempVars.ClaimUser.id}",
+        [
+          "KICK_MEMBERS",
+          "BAN_MEMBERS"
+        ]
+      ],
+      "formnames": [
+        "user",
+        "permissions"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "close Fail_1",
+      "guid": "bdb9a658-23bb-468f-95ce-ab7f7895944a",
+      "reactionFields": [],
+      "embedfields": [],
+      "saveToVariable": "Claimerror",
+      "saveToVariableType": "temp",
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "60c17926-9c2d-4a5c-8f70-5af8ee1df9b7"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "db003400-10b0-4466-9105-59b8e93740a5"
+        }
+      ],
+      "x": 1993,
+      "y": 609,
+      "rtype": "Message",
+      "rsubtype": "Send Embed",
+      "formdata": [
+        "${tempVars.NewTicket.id}",
+        "FF0000",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "<@${tempVars.CloseUser.id}> you cannot Claim your own ticket !\n",
+        "",
+        "",
+        "",
+        "false",
+        "Claimerror",
+        "temp"
+      ],
+      "formnames": [
+        "channelname",
+        "color",
+        "title",
+        "url",
+        "authorname",
+        "authorimageurl",
+        "authorlink",
+        "description",
+        "thumbnail",
+        "image",
+        "footer",
+        "timestamp",
+        "saveToVariable",
+        "saveToVariableType"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "wait del error_3_2",
+      "guid": "60c17926-9c2d-4a5c-8f70-5af8ee1df9b7",
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "f55b2756-53ba-42a8-8e49-e334d4050f7b"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "bdb9a658-23bb-468f-95ce-ab7f7895944a"
+        }
+      ],
+      "x": 2170,
+      "y": 605,
+      "rtype": "Control",
+      "rsubtype": "Wait",
+      "formdata": [
+        "5",
+        "seconds"
+      ],
+      "formnames": [
+        "waitduration",
+        "unit"
+      ],
+      "messageActionRows": []
+    },
+    {
+      "type": "response",
+      "name": "del error_1_1",
+      "guid": "f55b2756-53ba-42a8-8e49-e334d4050f7b",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": []
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "60c17926-9c2d-4a5c-8f70-5af8ee1df9b7"
+        }
+      ],
+      "x": 2352,
+      "y": 622,
+      "rtype": "Message",
+      "rsubtype": "Delete Message",
+      "formdata": [
+        "${tempVars.Claimerror.id}",
+        "${dbsVars.CommandChannel.id}"
+      ],
+      "formnames": [
+        "varname",
+        "channelName"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "update perms Teamler",
+      "guid": "cfc02311-ac9d-475d-9c5e-5fb943cdb395",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "cff1b1e5-1153-4201-9f38-e918516b5cc9"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "db003400-10b0-4466-9105-59b8e93740a5"
+        }
+      ],
+      "x": 2114,
+      "y": 427,
+      "rtype": "Channel Action",
+      "rsubtype": "Update Channel Permissions",
+      "formdata": [
+        "${tempVars.NewTicket.id}",
+        "${tempVars.ClaimUser.id}",
+        [
+          "VIEW_CHANNEL",
+          "SEND_MESSAGES",
+          "MANAGE_MESSAGES",
+          "READ_MESSAGE_HISTORY"
+        ],
+        "Allow"
+      ],
+      "formnames": [
+        "channelName",
+        "permid",
+        "permissions",
+        "allow"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "update perms Teamler_1",
+      "guid": "cff1b1e5-1153-4201-9f38-e918516b5cc9",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "99d1a706-7091-4d23-b85b-285aaffdf2da"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "cfc02311-ac9d-475d-9c5e-5fb943cdb395"
+        }
+      ],
+      "x": 2277,
+      "y": 439,
+      "rtype": "Channel Action",
+      "rsubtype": "Update Channel Permissions",
+      "formdata": [
+        "${tempVars.NewTicket.id}",
+        "979222431677952050",
+        [
+          "VIEW_CHANNEL"
+        ],
+        "Deny"
+      ],
+      "formnames": [
+        "channelName",
+        "permid",
+        "permissions",
+        "allow"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "update perms Teamler_2",
+      "guid": "99d1a706-7091-4d23-b85b-285aaffdf2da",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "20c17a88-4542-4828-a00b-7c55ad2e7e7e"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "cff1b1e5-1153-4201-9f38-e918516b5cc9"
+        }
+      ],
+      "x": 2442,
+      "y": 454,
+      "rtype": "Channel Action",
+      "rsubtype": "Update Channel Permissions",
+      "formdata": [
+        "${tempVars.NewTicket.id}",
+        "${tempVars.SupportUser.id}",
+        [
+          "VIEW_CHANNEL",
+          "SEND_MESSAGES",
+          "READ_MESSAGE_HISTORY"
+        ],
+        "Allow"
+      ],
+      "formnames": [
+        "channelName",
+        "permid",
+        "permissions",
+        "allow"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    },
+    {
+      "type": "response",
+      "name": "send Claim Message",
+      "guid": "20c17a88-4542-4828-a00b-7c55ad2e7e7e",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": []
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "99d1a706-7091-4d23-b85b-285aaffdf2da"
+        }
+      ],
+      "x": 2622,
+      "y": 464,
+      "rtype": "Message",
+      "rsubtype": "Send Embed",
+      "formdata": [
+        "${tempVars.NewTicket.id}",
+        "2BFF00",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "Ich [<@${tempVars.ClaimUser.id}>] I will deal with your concern now !",
+        "",
+        "",
+        "",
+        "false",
+        "",
+        "temp"
+      ],
+      "formnames": [
+        "channelname",
+        "color",
+        "title",
+        "url",
+        "authorname",
+        "authorimageurl",
+        "authorlink",
+        "description",
+        "thumbnail",
+        "image",
+        "footer",
+        "timestamp",
+        "saveToVariable",
+        "saveToVariableType"
+      ],
+      "messageActionRows": [],
+      "valueFields": []
+    }
+  ]
+}

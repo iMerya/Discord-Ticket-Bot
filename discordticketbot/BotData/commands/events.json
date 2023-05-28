@@ -1,0 +1,284 @@
+{
+  "command": [
+    {
+      "name": "User Joins Server",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "user": "newuser"
+      }
+    },
+    {
+      "name": "Any Message",
+      "perms": [],
+      "actions": [
+        {
+          "name": "check warns",
+          "category": "User Data",
+          "type": "Check User Data",
+          "trueActions": [
+            {
+              "name": "add warn rule to user",
+              "category": "User Action",
+              "type": "Add Role to User",
+              "messageActionRows": [],
+              "user": "${tempVars.anymessagemember.id}",
+              "rolename": "Warn"
+            }
+          ],
+          "falseActions": [],
+          "messageActionRows": [],
+          "user": "${tempVars.anymessagemember.id}",
+          "field": "warns",
+          "compare": "greater than",
+          "value": "3"
+        },
+        {
+          "name": "check warns_1",
+          "category": "User Data",
+          "type": "Check User Data",
+          "trueActions": [
+            {
+              "name": "remove warn rule from user",
+              "category": "User Action",
+              "type": "Remove Role From User",
+              "messageActionRows": [],
+              "user": "${tempVars.anymessagemember.id}",
+              "rolename": "Warn",
+              "reason": "Warn System"
+            }
+          ],
+          "falseActions": [],
+          "messageActionRows": [],
+          "user": "${tempVars.anymessagemember.id}",
+          "field": "warns",
+          "compare": "less than",
+          "value": "4"
+        }
+      ],
+      "var": {}
+    },
+    {
+      "name": "User Kicked",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "user": "kickuser"
+      }
+    },
+    {
+      "name": "User Banned",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "user": "banuser"
+      }
+    },
+    {
+      "name": "Bot Initialization",
+      "perms": [],
+      "actions": [],
+      "var": {}
+    },
+    {
+      "name": "Channel Create",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": "createdchannel"
+      }
+    },
+    {
+      "name": "Channel Delete",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": "deletedchannel"
+      }
+    },
+    {
+      "name": "Channel Pins Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": "updatepinschannel"
+      }
+    },
+    {
+      "name": "Channel Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": "updatechannel"
+      }
+    },
+    {
+      "name": "Emoji Create",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": "createdemoji"
+      }
+    },
+    {
+      "name": "Emoji Delete",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": "deletedemoji"
+      }
+    },
+    {
+      "name": "Emoji Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": "updatedemoji"
+      }
+    },
+    {
+      "name": "Guild Ban Remove",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Create",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Delete",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Member Available",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Member Speaking",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Member Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Unavailable",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Message Delete",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Message Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Role Create",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Role Delete",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Role Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Typing Start",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "User Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Button Interaction",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Select Interaction",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Command Interaction",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    }
+  ]
+}

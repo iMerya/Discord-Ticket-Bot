@@ -1,0 +1,480 @@
+{
+  "command": [
+    {
+      "name": "ticket",
+      "actions": [
+        {
+          "name": "check Teanler",
+          "category": "User Action",
+          "type": "Check User Permissions",
+          "trueActions": [
+            {
+              "name": "send panel",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "color": "00FF44",
+              "title": "Ticket Support",
+              "url": "",
+              "authorname": "",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "React with '📨' to create a support ticket\n",
+              "thumbnail": "${dbsVars.guild.iconURL}",
+              "image": "",
+              "footer": "Support System Beta v1 Developer By Merya",
+              "timestamp": "false",
+              "savetovariable": "TicketPanel",
+              "savetovariabletype": "temp"
+            },
+            {
+              "name": "del command",
+              "category": "Message",
+              "type": "Delete Message",
+              "messageActionRows": [],
+              "varname": "${dbsVars.CommandMessage.id}",
+              "channelname": "${dbsVars.CommandChannel.id}"
+            },
+            {
+              "name": "add panel reactions",
+              "category": "Reaction",
+              "type": "Add Reaction Listener",
+              "reactionActions": {
+                "📨": [
+                  {
+                    "name": "create Ticket",
+                    "category": "Channel Action",
+                    "type": "Create Channel",
+                    "messageActionRows": [],
+                    "channelname": "ticket-${tempVars.SupportUser.displayName}",
+                    "chancategory": "1077624700898922506",
+                    "reason": "Neues Ticket",
+                    "channeltype": "Text",
+                    "savetovariable": "NewTicket",
+                    "savetovariabletype": "temp"
+                  },
+                  {
+                    "name": "add Ticket Block role",
+                    "category": "User Action",
+                    "type": "Add Role to User",
+                    "messageActionRows": [],
+                    "user": "${tempVars.SupportUser.id}",
+                    "rolename": "1052457839077097573"
+                  },
+                  {
+                    "name": "update perms",
+                    "category": "Channel Action",
+                    "type": "Update Channel Permissions",
+                    "messageActionRows": [],
+                    "channelname": "${tempVars.NewTicket.id}",
+                    "permid": "${tempVars.SupportUser.id}",
+                    "permissions": [
+                      "VIEW_CHANNEL",
+                      "SEND_MESSAGES",
+                      "READ_MESSAGE_HISTORY"
+                    ],
+                    "allow": "Allow"
+                  },
+                  {
+                    "name": "update perms_1",
+                    "category": "Channel Action",
+                    "type": "Update Channel Permissions",
+                    "messageActionRows": [],
+                    "channelname": "${tempVars.NewTicket.id}",
+                    "permid": "286590281032269825",
+                    "permissions": [
+                      "VIEW_CHANNEL",
+                      "SEND_MESSAGES",
+                      "MANAGE_MESSAGES",
+                      "READ_MESSAGE_HISTORY"
+                    ],
+                    "allow": "Allow"
+                  },
+                  {
+                    "name": "wait del error_1",
+                    "category": "Control",
+                    "type": "Wait",
+                    "messageActionRows": [],
+                    "waitduration": "1",
+                    "unit": "seconds"
+                  },
+                  {
+                    "name": "send User/Team Ping",
+                    "category": "Message",
+                    "type": "Send Message",
+                    "messageActionRows": [],
+                    "channelname": "${tempVars.NewTicket.id}",
+                    "messagetext": "<@${tempVars.SupportUser.id}> | <@&979222431677952050>",
+                    "savetovariable": "",
+                    "savetovariabletype": "temp"
+                  },
+                  {
+                    "name": "wait del error_2",
+                    "category": "Control",
+                    "type": "Wait",
+                    "messageActionRows": [],
+                    "waitduration": "5",
+                    "unit": "seconds"
+                  },
+                  {
+                    "name": "send Ticket Msg",
+                    "category": "Message",
+                    "type": "Send Embed",
+                    "messageActionRows": [],
+                    "channelname": "${tempVars.NewTicket.id}",
+                    "color": "14FBFF",
+                    "title": "Welcome",
+                    "url": "",
+                    "authorname": "${tempVars.SupportUser.displayName}",
+                    "authorimageurl": "${dbsVars.guild.iconURL}",
+                    "authorlink": "",
+                    "description": "<@${tempVars.SupportUser.id}> Welcome to your ticket. A team member will take care of you soon. Please write your request in time.",
+                    "thumbnail": "${tempVars.SupportUser.user.avatarURL}",
+                    "image": "",
+                    "footer": "ID. ${tempVars.SupportUser.id}",
+                    "timestamp": "false",
+                    "savetovariable": "TicketMsg",
+                    "savetovariabletype": "temp"
+                  },
+                  {
+                    "name": "add Close Emoji",
+                    "category": "Reaction",
+                    "type": "Add Reaction Listener",
+                    "reactionActions": {
+                      "🔒": [
+                        {
+                          "name": "check Teamler",
+                          "category": "User Action",
+                          "type": "Check User Permissions",
+                          "trueActions": [
+                            {
+                              "name": "Close Frag Nach",
+                              "category": "Message",
+                              "type": "Send Embed",
+                              "messageActionRows": [],
+                              "channelname": "${tempVars.NewTicket.id}",
+                              "color": "FF0000",
+                              "title": "",
+                              "url": "",
+                              "authorname": "",
+                              "authorimageurl": "",
+                              "authorlink": "",
+                              "description": "<@${tempVars.CloseUser.id}> Do you really want to close the ticket?\n",
+                              "thumbnail": "",
+                              "image": "",
+                              "footer": "",
+                              "timestamp": "false",
+                              "savetovariable": "CloseFragNach",
+                              "savetovariabletype": "temp"
+                            },
+                            {
+                              "name": "add close Emojis",
+                              "category": "Reaction",
+                              "type": "Add Reaction Listener",
+                              "reactionActions": {
+                                "☑️": [
+                                  {
+                                    "name": "Close Check Msg",
+                                    "category": "Message",
+                                    "type": "Send Embed",
+                                    "messageActionRows": [],
+                                    "channelname": "${tempVars.NewTicket.id}",
+                                    "color": "FF0000",
+                                    "title": "",
+                                    "url": "",
+                                    "authorname": "",
+                                    "authorimageurl": "",
+                                    "authorlink": "",
+                                    "description": "Das Ticket <#${tempVars.NewTicket.id}> will be drawn in 5 seconds !",
+                                    "thumbnail": "",
+                                    "image": "",
+                                    "footer": "",
+                                    "timestamp": "false",
+                                    "savetovariable": "",
+                                    "savetovariabletype": "temp"
+                                  },
+                                  {
+                                    "name": "wait del error_3_1",
+                                    "category": "Control",
+                                    "type": "Wait",
+                                    "messageActionRows": [],
+                                    "waitduration": "5",
+                                    "unit": "seconds"
+                                  },
+                                  {
+                                    "name": "Del Ticket",
+                                    "category": "Channel Action",
+                                    "type": "Delete Channel",
+                                    "messageActionRows": [],
+                                    "channelname": "${tempVars.NewTicket.id}",
+                                    "reason": "Ticket Complete"
+                                  },
+                                  {
+                                    "name": "del Ticket Block role",
+                                    "category": "User Action",
+                                    "type": "Remove Role From User",
+                                    "messageActionRows": [],
+                                    "user": "${tempVars.SupportUser.id}",
+                                    "rolename": "1052457839077097573",
+                                    "reason": "Neues Ticket"
+                                  }
+                                ],
+                                "❌": [
+                                  {
+                                    "name": "del Frag Nach",
+                                    "category": "Message",
+                                    "type": "Delete Message",
+                                    "messageActionRows": [],
+                                    "varname": "${tempVars.CloseFragNach.id}",
+                                    "channelname": "${tempVars.NewTicket.id}"
+                                  }
+                                ]
+                              },
+                              "messageActionRows": [],
+                              "message": "${tempVars.CloseFragNach.id}",
+                              "duration": "0",
+                              "reactionemoji": "Close2Emoji",
+                              "reactionuser": "Close2User",
+                              "react": "BOOL_TRUE@@"
+                            }
+                          ],
+                          "falseActions": [
+                            {
+                              "name": "close Fail",
+                              "category": "Message",
+                              "type": "Send Embed",
+                              "messageActionRows": [],
+                              "channelname": "${tempVars.NewTicket.id}",
+                              "color": "FF0000",
+                              "title": "",
+                              "url": "",
+                              "authorname": "",
+                              "authorimageurl": "",
+                              "authorlink": "",
+                              "description": "<@${tempVars.CloseUser.id}> you cannot close your own ticket !\n",
+                              "thumbnail": "",
+                              "image": "",
+                              "footer": "",
+                              "timestamp": "false",
+                              "savetovariable": "CloseFail",
+                              "savetovariabletype": "temp"
+                            },
+                            {
+                              "name": "wait del error_3",
+                              "category": "Control",
+                              "type": "Wait",
+                              "messageActionRows": [],
+                              "waitduration": "5",
+                              "unit": "seconds"
+                            },
+                            {
+                              "name": "del error_1",
+                              "category": "Message",
+                              "type": "Delete Message",
+                              "messageActionRows": [],
+                              "varname": "${tempVars.CloseFail.id}",
+                              "channelname": "${dbsVars.CommandChannel.id}"
+                            }
+                          ],
+                          "messageActionRows": [],
+                          "user": "${tempVars.CloseUser.id}",
+                          "permissions": [
+                            "KICK_MEMBERS",
+                            "BAN_MEMBERS"
+                          ]
+                        }
+                      ]
+                    },
+                    "messageActionRows": [],
+                    "message": "${tempVars.TicketMsg.id}",
+                    "duration": "0",
+                    "reactionemoji": "CloseEmoji",
+                    "reactionuser": "CloseUser",
+                    "react": "BOOL_TRUE@@"
+                  },
+                  {
+                    "name": "add Claim Reactions",
+                    "category": "Reaction",
+                    "type": "Add Reaction Listener",
+                    "reactionActions": {
+                      "📜": [
+                        {
+                          "name": "check Teamler_1",
+                          "category": "User Action",
+                          "type": "Check User Permissions",
+                          "trueActions": [
+                            {
+                              "name": "update perms Teamler",
+                              "category": "Channel Action",
+                              "type": "Update Channel Permissions",
+                              "messageActionRows": [],
+                              "channelname": "${tempVars.NewTicket.id}",
+                              "permid": "${tempVars.ClaimUser.id}",
+                              "permissions": [
+                                "VIEW_CHANNEL",
+                                "SEND_MESSAGES",
+                                "MANAGE_MESSAGES",
+                                "READ_MESSAGE_HISTORY"
+                              ],
+                              "allow": "Allow"
+                            },
+                            {
+                              "name": "update perms Teamler_1",
+                              "category": "Channel Action",
+                              "type": "Update Channel Permissions",
+                              "messageActionRows": [],
+                              "channelname": "${tempVars.NewTicket.id}",
+                              "permid": "979222431677952050",
+                              "permissions": [
+                                "VIEW_CHANNEL"
+                              ],
+                              "allow": "Deny"
+                            },
+                            {
+                              "name": "update perms Teamler_2",
+                              "category": "Channel Action",
+                              "type": "Update Channel Permissions",
+                              "messageActionRows": [],
+                              "channelname": "${tempVars.NewTicket.id}",
+                              "permid": "${tempVars.SupportUser.id}",
+                              "permissions": [
+                                "VIEW_CHANNEL",
+                                "SEND_MESSAGES",
+                                "READ_MESSAGE_HISTORY"
+                              ],
+                              "allow": "Allow"
+                            },
+                            {
+                              "name": "send Claim Message",
+                              "category": "Message",
+                              "type": "Send Embed",
+                              "messageActionRows": [],
+                              "channelname": "${tempVars.NewTicket.id}",
+                              "color": "2BFF00",
+                              "title": "",
+                              "url": "",
+                              "authorname": "",
+                              "authorimageurl": "",
+                              "authorlink": "",
+                              "description": "Ich [<@${tempVars.ClaimUser.id}>] I will deal with your concern now !",
+                              "thumbnail": "",
+                              "image": "",
+                              "footer": "",
+                              "timestamp": "false",
+                              "savetovariable": "",
+                              "savetovariabletype": "temp"
+                            }
+                          ],
+                          "falseActions": [
+                            {
+                              "name": "close Fail_1",
+                              "category": "Message",
+                              "type": "Send Embed",
+                              "messageActionRows": [],
+                              "channelname": "${tempVars.NewTicket.id}",
+                              "color": "FF0000",
+                              "title": "",
+                              "url": "",
+                              "authorname": "",
+                              "authorimageurl": "",
+                              "authorlink": "",
+                              "description": "<@${tempVars.CloseUser.id}> you cannot Claim your own ticket !\n",
+                              "thumbnail": "",
+                              "image": "",
+                              "footer": "",
+                              "timestamp": "false",
+                              "savetovariable": "Claimerror",
+                              "savetovariabletype": "temp"
+                            },
+                            {
+                              "name": "wait del error_3_2",
+                              "category": "Control",
+                              "type": "Wait",
+                              "messageActionRows": [],
+                              "waitduration": "5",
+                              "unit": "seconds"
+                            },
+                            {
+                              "name": "del error_1_1",
+                              "category": "Message",
+                              "type": "Delete Message",
+                              "messageActionRows": [],
+                              "varname": "${tempVars.Claimerror.id}",
+                              "channelname": "${dbsVars.CommandChannel.id}"
+                            }
+                          ],
+                          "messageActionRows": [],
+                          "user": "${tempVars.ClaimUser.id}",
+                          "permissions": [
+                            "KICK_MEMBERS",
+                            "BAN_MEMBERS"
+                          ]
+                        }
+                      ]
+                    },
+                    "messageActionRows": [],
+                    "message": "${tempVars.TicketMsg.id}",
+                    "duration": "0",
+                    "reactionemoji": "ClaimEmoji",
+                    "reactionuser": "ClaimUser",
+                    "react": "BOOL_TRUE@@"
+                  }
+                ]
+              },
+              "messageActionRows": [],
+              "message": "${tempVars.TicketPanel.id}",
+              "duration": "0",
+              "reactionemoji": "SupportEmoji",
+              "reactionuser": "SupportUser",
+              "react": "BOOL_TRUE@@"
+            }
+          ],
+          "falseActions": [
+            {
+              "name": "send error",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandAuthor.id}",
+              "color": "FF0000",
+              "title": "",
+              "url": "",
+              "authorname": "",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "You do not have sufficient privileges to do this!\n",
+              "thumbnail": "",
+              "image": "",
+              "footer": "",
+              "timestamp": "false",
+              "savetovariable": "error",
+              "savetovariabletype": "temp"
+            },
+            {
+              "name": "wait del error",
+              "category": "Control",
+              "type": "Wait",
+              "messageActionRows": [],
+              "waitduration": "5",
+              "unit": "seconds"
+            },
+            {
+              "name": "del error",
+              "category": "Message",
+              "type": "Delete Message",
+              "messageActionRows": [],
+              "varname": "${tempVars.error.id}",
+              "channelname": "${dbsVars.CommandChannel.id}"
+            }
+          ],
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "permissions": [
+            "ADMINISTRATOR"
+          ]
+        }
+      ]
+    }
+  ]
+}
