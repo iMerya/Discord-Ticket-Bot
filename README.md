@@ -22,3 +22,8 @@ Discord Ticket Bot 2023
 #### 4 - After doing the above 3 items, open a terminal in the folder and type `node src/index.js` then your bot will run actively. (Instead of opening a terminal, you can click on the .bat application and run it.)
 
 Made with :heart: and JavaScript!
+
+
+Please Contact Me For Issues.
+
+####Discord : Merya#0001
